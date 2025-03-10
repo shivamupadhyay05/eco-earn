@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard - Eco Earn</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: #f5f5f5;
+            padding: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #4CAF50;
+        }
+
+        .nav-links a.active {
+            color: #4CAF50;
+        }
+
+        /* Top Header */
+        .top-header {
+            background-color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .search-box {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            width: 300px;
+            border-radius: 2px 0 0 2px;
+        }
+
+        .search-button {
+            padding: 5px 10px;
+            background-color: #2b5aa1;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 0 2px 2px 0;
+        }
+
+        .create-account {
+            color: #2b5aa1;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Site Title */
+        .site-title {
+            text-align: center;
+            color: #2b5aa1;
+            padding: 20px 0;
+            font-size: 24px;
+            font-weight: bold;
+            background-color: #fff;
+        }
+
+        /* Leaderboard Section */
+        .leaderboard-container {
+            width: 80%;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .leaderboard-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2b5aa1;
+            font-size: 28px;
+        }
+
+        .leaderboard-subtitle {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 16px;
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .leaderboard-table th, 
+        .leaderboard-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .leaderboard-table th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+
+        .leaderboard-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .leaderboard-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .rank {
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .top-rank {
+            color: #FFD700;
+        }
+
+        .points {
+            font-weight: bold;
+            color: #4CAF50;
+            text-align: right;
+        }
+
+        .join-cta {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .join-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .join-button:hover {
+            background-color: #45a049;
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: #f9f9f9;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .contact h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .contact p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .contact a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #f5f5f5;
+            padding: 10px 0;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-links {
+                margin-top: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .search-box {
+                width: 200px;
+            }
+
+            .leaderboard-container {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .leaderboard-table th, 
+            .leaderboard-table td {
+                padding: 8px 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="inventory.html">Inventory</a></li>
+                <li><a href="leaderboard.html" class="active">Leaderboard</a></li>
+                <li><a href="profile.html">Profile</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Top Header with Search and Account Creation -->
+    <div class="top-header">
+        <div class="create-account">Create Your Free Account today</div>
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="Search...">
+            <button class="search-button">→</button>
+        </div>
+    </div>
+
+    <!-- Site Title -->
+    <div class="site-title">Eco Earn - Recycle Plastic, Save the Planet</div>
+
+    <!-- Leaderboard Section -->
+    <section class="leaderboard-container">
+        <h1 class="leaderboard-title">Recycling Champions</h1>
+        <p class="leaderboard-subtitle">Our top contributors who are making a difference for our planet</p>
+        
+        <table class="leaderboard-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Points Earned</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="rank top-rank">1</td>
+                    <td>Sarah Johnson</td>
+                    <td class="points">12,845</td>
+                </tr>
+                <tr>
+                    <td class="rank top-rank">2</td>
+                    <td>Michael Chen</td>
+                    <td class="points">11,762</td>
+                </tr>
+                <tr>
+                    <td class="rank top-rank">3</td>
+                    <td>Emma Rodriguez</td>
+                    <td class="points">10,587</td>
+                </tr>
+                <tr>
+                    <td class="rank">4</td>
+                    <td>David Patel</td>
+                    <td class="points">9,356</td>
+                </tr>
+                <tr>
+                    <td class="rank">5</td>
+                    <td>Lisa Nguyen</td>
+                    <td class="points">8,742</td>
+                </tr>
+                <tr>
+                    <td class="rank">6</td>
+                    <td>James Wilson</td>
+                    <td class="points">7,891</td>
+                </tr>
+                <tr>
+                    <td class="rank">7</td>
+                    <td>Olivia Kim</td>
+                    <td class="points">6,943</td>
+                </tr>
+                <tr>
+                    <td class="rank">8</td>
+                    <td>Robert Garcia</td>
+                    <td class="points">5,872</td>
+                </tr>
+                <tr>
+                    <td class="rank">9</td>
+                    <td>Sophia Martinez</td>
+                    <td class="points">4,756</td>
+                </tr>
+                <tr>
+                    <td class="rank">10</td>
+                    <td>Thomas Lee</td>
+                    <td class="points">3,984</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="join-cta">
+            <p>Want to join our recycling champions?</p>
+            <a href="signup.html" class="join-button">Start Recycling Today</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <h2>Contact Administrator</h2>
+        <p>Email: admin@ecoearn.com</p>
+        <p>Contact number: 555-123-4567</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy;2023 by Eco Earn. Recycle Plastic, Save the Planet</p>
+    </footer>
+</body>
+</html>

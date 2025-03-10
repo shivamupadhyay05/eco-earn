@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Earn - Save the Planet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: #1dc64a;
+            padding: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #4CAF50;
+        }
+
+        .nav-links a.active {
+            color: #4CAF50;
+        }
+
+        /* Header with signup */
+        .top-header {
+            background-color: #9ef990;
+            padding: 10px 0;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .search-box {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            width: 300px;
+            border-radius: 2px 0 0 2px;
+        }
+
+        .search-button {
+            padding: 5px 10px;
+            background-color: #2b5aa1;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 0 2px 2px 0;
+        }
+
+        .create-account {
+            color: #2b5aa1;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Main title */
+        .site-title {
+            text-align: center;
+            color: #2b5aa1;
+            padding: 20px 0;
+            font-size: 24px;
+            font-weight: bold;
+            background-color: #d8dbef;
+        }
+
+        /* Main banner */
+        .main-banner {
+            width: 100%;
+            height: 60vh;
+            background-image: url('https://images.unsplash.com/photo-1604187351574-c75ca79f5807?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        /* Services Section */
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .service-item {
+            width: 33.33%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .service-item:hover .service-img {
+            transform: scale(1.1);
+        }
+
+        .service-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #1a3c7f;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .service-item:nth-child(1) .service-content {
+            background-color: #fff;
+            color: #333;
+        }
+
+        .service-item:nth-child(3) .service-content {
+            background-color: #ffd200;
+            color: #333;
+        }
+
+        .service-item:nth-child(5) .service-content {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .service-content h3 {
+            margin-bottom: 10px;
+        }
+
+        .service-content p {
+            font-size: 14px;
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: #f9f9f9;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .contact h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .contact p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .contact a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #12898b;
+            padding: 10px 0;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .service-item {
+                width: 100%;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-links {
+                margin-top: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .search-box {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="services.html"><s></s>Services</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="inventory.html">Inventory</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="profile.html">Profile</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Top Header with Search and Account Creation -->
+    <div class="top-header">
+        <div class="create-account">Create Your Free Account today</div>
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="Search...">
+            <button class="search-button">→</button>
+        </div>
+    </div>
+
+    <!-- Site Title -->
+    <div class="site-title">Eco Earn - Recycle Plastic, Save the Planet</div>
+
+    <!-- Main Banner with Parallax Effect -->
+    <div class="main-banner parallax"></div>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="service-item">
+            <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="Scheduled Delivery" class="service-img">
+            <div class="service-content">
+                <h3>Scheduled Pickup</h3>
+                <p>We Come To You</p>
+            </div>
+        </div>
+        <div class="service-item">
+            <img src="https://images.unsplash.com/photo-1607503873903-c5e95f80d7b9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="Recycling Consultation" class="service-img">
+            <div class="service-content">
+                <h3>Recycling Consultation</h3>
+                <p>Expert Guidance</p>
+            </div>
+        </div>
+        <div class="service-item">
+            <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="Rewards Program" class="service-img">
+            <div class="service-content">
+                <h3>Rewards Program</h3>
+                <p>Earn While You Recycle</p>
+            </div>
+        </div>
+        <div class="service-item">
+            <img src="https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="Scan Your Plastic" class="service-img">
+            <div class="service-content">
+                <h3>Scan Your Plastic</h3>
+                <p>Quick Identification & Sorting</p>
+            </div>
+        </div>
+        <div class="service-item">
+            <img src="https://images.unsplash.com/photo-1607344645866-879e053a0e9d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="Redeem Your Rewards" class="service-img">
+            <div class="service-content">
+                <h3>Redeem Your Rewards</h3>
+                <p>Turn Points Into Benefits</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <h2>Contact Administrator</h2>
+        <p>Email: shivamupadhyayop@gmail.com</p>
+        <p>Contact number:6390533255</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy;2023 by Eco Earn. Recycle Plastic, Save the Planet</p>
+    </footer>
+
+    <script>
+        // Enhanced Parallax Effect
+        window.addEventListener('scroll', function() {
+            let scrollPosition = window.pageYOffset;
+            let mainBanner = document.querySelector('.main-banner');
+            
+            // Adjust the background position based on scroll
+            mainBanner.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+        });
+    </script>
+</body>
+</html>

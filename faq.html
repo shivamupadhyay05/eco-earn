@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Eco Earn</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: #f5f5f5;
+            padding: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #4CAF50;
+        }
+
+        .nav-links a.active {
+            color: #4CAF50;
+        }
+
+        /* Header with signup */
+        .top-header {
+            background-color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .search-box {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            width: 300px;
+            border-radius: 2px 0 0 2px;
+        }
+
+        .search-button {
+            padding: 5px 10px;
+            background-color: #2b5aa1;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 0 2px 2px 0;
+        }
+
+        .create-account {
+            color: #2b5aa1;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Main title */
+        .site-title {
+            text-align: center;
+            color: #2b5aa1;
+            padding: 20px 0;
+            font-size: 24px;
+            font-weight: bold;
+            background-color: #fff;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            width: 80%;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-section h2 {
+            color: #2b5aa1;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .faq-categories {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .category-btn {
+            background-color: #fff;
+            border: 2px solid #4CAF50;
+            color: #4CAF50;
+            padding: 10px 15px;
+            margin: 0 10px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .faq-container {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background-color: #fff;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            background-color: #f5f5f5;
+            padding: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background-color 0.3s;
+        }
+
+        .faq-question:hover {
+            background-color: #e9e9e9;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 18px;
+            color: #4CAF50;
+        }
+
+        .faq-item.active .faq-question::after {
+            content: '-';
+        }
+
+        .faq-answer {
+            padding: 0 15px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 15px;
+            max-height: 500px;
+        }
+
+        .faq-category {
+            display: none;
+        }
+
+        .faq-category.active {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #f5f5f5;
+            padding: 10px 0;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-links {
+                margin-top: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .search-box {
+                width: 200px;
+            }
+
+            .faq-section {
+                width: 90%;
+            }
+
+            .faq-categories {
+                flex-wrap: wrap;
+            }
+
+            .category-btn {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="faq.html" class="active">FAQ</a></li>
+                <li><a href="inventory.html">Inventory</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="profile.html">Profile</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Top Header with Search and Account Creation -->
+    <div class="top-header">
+        <div class="create-account">Create Your Free Account today</div>
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="Search...">
+            <button class="search-button">→</button>
+        </div>
+    </div>
+
+    <!-- Site Title -->
+    <div class="site-title">Frequently Asked Questions - Eco Earn</div>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <h2>Questions & Answers</h2>
+        <div class="faq-categories">
+            <button class="category-btn active" data-category="general">General</button>
+            <button class="category-btn" data-category="services">Services</button>
+            <button class="category-btn" data-category="rewards">Rewards</button>
+            <button class="category-btn" data-category="plastic">Plastic Info</button>
+        </div>
+        
+        <div class="faq-container">
+            <!-- General FAQs -->
+            <div class="faq-category active" id="general">
+                <div class="faq-item">
+                    <div class="faq-question">What is Eco Earn?</div>
+                    <div class="faq-answer">
+                        <p>Eco Earn is a platform that incentivizes plastic recycling by rewarding users for their contribution to saving the environment. We collect, process, and recycle plastic waste while offering rewards to our users based on the amount and type of plastic they recycle.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How do I create an account?</div>
+                    <div class="faq-answer">
+                        <p>Creating an account is simple and free. Click on the "Create Your Free Account today" link at the top of our website, fill in your details, verify your email address, and you're ready to start earning rewards for recycling!</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Is the service available everywhere?</div>
+                    <div class="faq-answer">
+                        <p>Currently, our services are available in select cities across India. We're rapidly expanding and adding new locations regularly. Check our service area map on the Services page to see if we operate in your area.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How can I contact customer support?</div>
+                    <div class="faq-answer">
+                        <p>You can reach our customer support team via email at support@ecoearn.com, by phone at +91 8123456789, or by using the contact form on our Contact page. Our support hours are Monday to Saturday, 9:00 AM to 6:00 PM.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Services FAQs -->
+            <div class="faq-category" id="services">
+                <div class="faq-item">
+                    <div class="faq-question">How does the scheduled pickup service work?</div>
+                    <div class="faq-answer">
+                        <p>Our scheduled pickup service allows you to book a time slot for our team to collect plastic waste from your location. Simply log in to your account, select "Schedule Pickup" from your dashboard, choose a preferred date and time, and our team will arrive at your location during the selected time slot.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What happens during a recycling consultation?</div>
+                    <div class="faq-answer">
+                        <p>During a recycling consultation, our experts evaluate your plastic waste generation patterns and provide personalized recommendations to reduce, reuse, and recycle effectively. We also offer guidance on proper sorting and storage techniques to maximize the value of your recyclables.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How does the plastic scanning feature work?</div>
+                    <div class="faq-answer">
+                        <p>Our mobile app includes a scanning feature that helps identify different types of plastic. Simply point your phone camera at the plastic item, and the app will recognize the resin identification code and provide information about its recyclability and potential reward points.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Is there a minimum amount of plastic required for pickup?</div>
+                    <div class="faq-answer">
+                        <p>Yes, to make the pickup service environmentally efficient, we request a minimum of 5 kg of plastic waste for scheduled pickups. For smaller amounts, you can use our drop-off points located throughout the city.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rewards FAQs -->
+            <div class="faq-category" id="rewards">
+                <div class="faq-item">
+                    <div class="faq-question">How do I earn points through recycling?</div>
+                    <div class="faq-answer">
+                        <p>Points are awarded based on the weight and type of plastic you recycle. For example, PET bottles typically earn 10 points per kilogram, while HDPE containers earn 12 points per kilogram. The exact point values for each type are available in your account dashboard.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What can I redeem my points for?</div>
+                    <div class="faq-answer">
+                        <p>Your earned points can be redeemed for a variety of rewards including cash transfers, discount coupons for eco-friendly products, restaurant vouchers, movie tickets, and donations to environmental causes. Visit the Rewards section of your account to see all available options.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How long do points remain valid?</div>
+                    <div class="faq-answer">
+                        <p>Points earned through Eco Earn remain valid for 12 months from the date they are credited to your account. We'll send you reminders when your points are approaching expiration so you can redeem them in time.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How do I check my points balance?</div>
+                    <div class="faq-answer">
+                        <p>Your current points balance is always visible on your account dashboard. You can also view your points history, including earnings and redemptions, in the "Points History" section of your profile.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plastic Info FAQs -->
+            <div class="faq-category" id="plastic">
+                <div class="faq-item">
+                    <div class="faq-question">What types of plastic do you accept?</div>
+                    <div class="faq-answer">
+                        <p>We accept all seven common types of plastic (labeled with resin identification codes 1-7):</p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>PET (1): Water bottles, soft drink bottles</li>
+                            <li>HDPE (2): Milk jugs, detergent bottles</li>
+                            <li>PVC (3): Shampoo bottles, clear food packaging</li>
+                            <li>LDPE (4): Plastic bags, squeeze bottles</li>
+                            <li>PP (5): Yogurt containers, medicine bottles</li>
+                            <li>PS (6): Disposable cups, food containers</li>
+                            <li>Other (7): Mixed plastics and specialized items</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Do I need to clean the plastic before recycling?</div>
+                    <div class="faq-answer">
+                        <p>Yes, we recommend rinsing plastic containers to remove food residue and liquids. This helps prevent contamination and odor issues during storage and processing. Items don't need to be spotless, but should be generally clean and dry.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How much plastic waste does an average person generate?</div>
+                    <div class="faq-answer">
+                        <p>An average person in India generates approximately 11 kg of plastic waste per year. Globally, this figure can be much higher, with some developed countries seeing per-capita plastic waste generation of over 50 kg annually.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Why is plastic recycling important?</div>
+                    <div class="faq-answer">
+                        <p>Plastic recycling is crucial because:</p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>It reduces landfill waste and ocean pollution</li>
+                            <li>It decreases the need for virgin plastic production, saving energy and reducing greenhouse gas emissions</li>
+                            <li>It conserves natural resources like petroleum that are used to make plastic</li>
+                            <li>It helps protect wildlife that can be harmed by plastic waste</li>
+                            <li>It creates jobs in the recycling and manufacturing industries</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How long does plastic take to decompose naturally?</div>
+                    <div class="faq-answer">
+                        <p>Most conventional plastics do not fully decompose. Instead, they break down into smaller and smaller pieces called microplastics. This process can take anywhere from 20 to 500 years depending on the type of plastic and environmental conditions. Some estimates suggest that certain plastics may take up to 1,000 years to decompose in landfills.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy;2023 by Eco Earn. Recycle Plastic, Save the Planet</p>
+    </footer>
+
+    <script>
+        // FAQ Accordion
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Accordion functionality
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const item = this.parentNode;
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close all items
+                    document.querySelectorAll('.faq-item').forEach(faqItem => {
+                        faqItem.classList.remove('active');
+                    });
+                    
+                    // If the clicked item wasn't active, make it active
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+            
+            // Category tabs functionality
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    
+                    // Remove active class from all buttons and categories
+                    categoryBtns.forEach(button => {
+                        button.classList.remove('active');
+                    });
+                    
+                    document.querySelectorAll('.faq-category').forEach(cat => 

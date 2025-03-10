@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Eco Earn</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+            background-color: #f9f9f9;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: #f5f5f5;
+            padding: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #4CAF50;
+        }
+
+        .nav-links a.active {
+            color: #4CAF50;
+        }
+
+        /* Site Title */
+        .site-title {
+            text-align: center;
+            color: #2b5aa1;
+            padding: 20px 0;
+            font-size: 24px;
+            font-weight: bold;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Login Container */
+        .login-container {
+            width: 90%;
+            max-width: 400px;
+            margin: 40px auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            color: #2b5aa1;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+        }
+
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            width: 100%;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .remember-me input {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .forgot-password a {
+            color: #2b5aa1;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+        }
+
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .divider span {
+            padding: 0 10px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .social-btn:hover {
+            background-color: #f5f5f5;
+        }
+
+        .social-btn i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 15px;
+            color: #666;
+        }
+
+        .signup-link a {
+            color: #2b5aa1;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #f5f5f5;
+            padding: 10px 0;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-links {
+                margin-top: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .login-container {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="inventory.html">Inventory</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="login.html" class="active">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Site Title -->
+    <div class="site-title">Eco Earn - Recycle Plastic, Save the Planet</div>
+
+    <!-- Login Form Container -->
+    <div class="login-container">
+        <div class="login-header">
+            <h1>Login</h1>
+            <p>Access your Eco Earn account</p>
+        </div>
+
+        <form>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
+            
+            <div class="remember-me">
+                <input type="checkbox" id="remember">
+                <label for="remember" style="display: inline; font-weight: normal;">Remember me</label>
+            </div>
+            
+            <div class="forgot-password">
+                <a href="#">Forgot password?</a>
+            </div>
+            
+            <button type="submit" class="submit-btn">Login</button>
+        </form>
+
+        <div class="divider">
+            <span>OR</span>
+        </div>
+
+        <div class="social-login">
+            <button class="social-btn">
+                <i>G</i> Google
+            </button>
+            <button class="social-btn">
+                <i>f</i> Facebook
+            </button>
+        </div>
+
+        <div class="signup-link">
+            Don't have an account? <a href="signup.html">Sign up</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy;2023 by Eco Earn. Recycle Plastic, Save the Planet</p>
+    </footer>
+</body>
+</html>

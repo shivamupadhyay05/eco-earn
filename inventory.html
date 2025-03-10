@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory - Eco Earn</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: #f5f5f5;
+            padding: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #4CAF50;
+        }
+
+        .nav-links a.active {
+            color: #4CAF50;
+        }
+
+        /* Top Header */
+        .top-header {
+            background-color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .search-box {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            width: 300px;
+            border-radius: 2px 0 0 2px;
+        }
+
+        .search-button {
+            padding: 5px 10px;
+            background-color: #2b5aa1;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 0 2px 2px 0;
+        }
+
+        .create-account {
+            color: #2b5aa1;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Site Title */
+        .site-title {
+            text-align: center;
+            color: #2b5aa1;
+            padding: 20px 0;
+            font-size: 24px;
+            font-weight: bold;
+            background-color: #fff;
+        }
+
+        /* Inventory Section */
+        .inventory-header {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .inventory-header h1 {
+            color: #2b5aa1;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .inventory-header p {
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .inventory-categories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px auto;
+            max-width: 1200px;
+            padding: 0 20px;
+        }
+
+        .category-card {
+            width: 100%;
+            max-width: 350px;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .category-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .category-title {
+            text-align: center;
+            padding: 15px 0;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .plates .category-title {
+            background-color: #f8f8f8;
+            color: #2b5aa1;
+        }
+
+        .utensils .category-title {
+            background-color: #1a3c7f;
+            color: white;
+        }
+
+        .glasses .category-title {
+            background-color: #ffd200;
+            color: #333;
+        }
+
+        .category-description {
+            padding: 15px;
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+            background-color: white;
+            min-height: 120px;
+        }
+
+        .view-products {
+            display: block;
+            text-align: center;
+            padding: 12px 0;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .view-products:hover {
+            background-color: #45a049;
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .products-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2b5aa1;
+            font-size: 28px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .product-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .product-eco-points {
+            font-size: 13px;
+            color: #2b5aa1;
+            margin-top: 5px;
+        }
+
+        .add-to-cart {
+            display: block;
+            width: 100%;
+            padding: 10px 0;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: #45a049;
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: #f9f9f9;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .contact h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .contact p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .contact a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #f5f5f5;
+            padding: 10px 0;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-links {
+                margin-top: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .search-box {
+                width: 200px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="inventory.html" class="active">Inventory</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="profile.html">Profile</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Top Header with Search and Account Creation -->
+    <div class="top-header">
+        <div class="create-account">Create Your Free Account today</div>
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="Search...">
+            <button class="search-button">→</button>
+        </div>
+    </div>
+
+    <!-- Site Title -->
+    <div class="site-title">Eco Earn - Recycle Plastic, Save the Planet</div>
+
+    <!-- Inventory Header -->
+    <div class="inventory-header">
+        <h1>Our Recycled Products</h1>
+        <p>All products are made from recycled plastic, helping to reduce waste and save our planet. Each purchase earns you Eco Points that can be redeemed for rewards!</p>
+    </div>
+
+    <!-- Product Categories -->
+    <div class="inventory-categories">
+        <div class="category-card plates">
+            <img src="https://images.unsplash.com/photo-1606850780554-b55ea4dd0b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="Recycled Plastic Plates" class="category-image">
+            <div class="category-title">Recycled Plastic Plates</div>
+            <div class="category-description">
+                Here you can purchase recycled plates, forks, spoons for your daily use, all these are made of recycled plastic.
+            </div>
+            <a href="#plates" class="view-products">View Plates</a>
+        </div>
+
+        <div class="category-card utensils">
+            <img src="https://images.unsplash.com/photo-1559466273-d95e72debaf8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="Kitchen Utensils" class="category-image">
+            <div class="category-title">Kitchen Utensils</div>
+            <div class="category-description">
+                Here you can buy kitchen utensils such as spatula, chopper board, peeler and tongs made of recycled plastic.
+            </div>
+            <a href="#utensils" class="view-products">View Utensils</a>
+        </div>
+
+        <div class="category-card glasses">
+            <img src="https://images.unsplash.com/photo-1579446565308-427218a2c60e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="Glasses" class="category-image">
+            <div class="category-title">Glasses</div>
+            <div class="category-description">
+                A large variety of colorful and multi-texture glasses will be available for customer purchase, made of recycled plastic.
+            </div>
+            <a href="#glasses" class="view-products">View Glasses</a>
+        </div>
+    </div>
+
+    <!-- Plates Section -->
+    <section id="plates" class="products-section">
+        <h2 class="products-title">Recycled Plastic Plates</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1563203369-26f2e4a5ccf7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Eco Dinner Plate Set" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Eco Dinner Plate Set (4pc)</div>
+                    <div class="product-description">Durable dinner plates made from 100% recycled plastic. Dishwasher safe.</div>
+                    <div class="product-price">$12.99</div>
+                    <div class="product-eco-points">Earn 65 Eco Points</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1598691734254-aadc92708703?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Eco Salad Plate Set" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Eco Salad Plate Set (4pc)</div>
+                    <div class="product-description">Medium-sized plates perfect for salads and appetizers.</div>
+                    <div class="product-price">$9.99</div>
+                    <div class="product-eco-points">Earn 50 Eco Points</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1580467211470-5672e74c5010?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Eco Bowl Set" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Eco Bowl Set (4pc)</div>
+                    <div class="product-description">Multi-purpose bowls for soups, cereals, and more.</div>
+                    <div class="product-price">$14.99</div>
+                    <div class="product-eco-points">Earn 75 Eco Points</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1541356160421-73bce4bd0acf?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Eco Cutlery Set" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Eco Cutlery Set (16pc)</div>
+                    <div class="product-description">Complete set of forks, knives, and spoons for daily use.</div>
+                    <div class="product-price">$19.99</div>
+                    <div class="product-eco-points">Earn 100 Eco Points</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Utensils Section -->
+    <section id="utensils" class="products-section">
+        <h2 class="products-title">Kitchen Utensils</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1590794056499-270106a38c78?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Eco Spatula Set" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Eco Spatula Set (3pc)</div>
+                    <div class="product-description">Heat-resistant spatulas in various sizes for cooking.</div>
+                    <div class="product-price">$15.99</div>
+                    <div class="product-eco-points">Earn 80 Eco Points</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1592025597416-2c3456994ebf?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Eco Chopping Board" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Eco Chopping Board</div>
+                    <div class="product-description">Durable and stain-resistant chopping board for food prep.</div>
+                    <div class="product-price">$18.99</div>
+                    <div class="product-eco-points">Earn 95 Eco Points</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1591223350132-c54e47f8d43d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Eco Peeler" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Eco Peeler</div>
+                    <div class="product-description">Ergonomic vegetable and fruit peeler with comfortable grip.</div>
+                    <div class="product-price">$6.99</div>
+                    <div class="product-eco-points">Earn 35 Eco Points</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1512389142860-9c449e58a543?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Eco Tongs" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Eco Tongs</div>
+                    <div class="product-description">Multi-purpose kitchen tongs for cooking and serving.</div>
+                    <div class="product-price">$8.99</div>
+                    <div class="product-eco-points">Earn 45 Eco Points</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Glasses Section -->
+    <section id="glasses" class="products-section">
+        <h2 class="products-title">Glasses</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1514361892635-6b07e31e75f9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Eco Tumbler Set" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Eco Tumbler Set (4pc)</div>
+                    <div class="product-description">Colorful tumblers perfect for everyday use.</div>
+                    <div class="product-price">$16.99</div>
+                    <div class="product-eco-points">Earn 85 Eco Points</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1629985858244-fd91dab1a293?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Eco Wine Glass Set" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Eco Wine Glass Set (4pc)</div>
+                    <div class="product-description">Elegant stemless wine glasses made from recycled plastic.</div>
+                    <div class="product-price">$22.99</div>
+                    <div class="product-eco-points">Earn 115 Eco Points</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1604768441068-b8e8eb2b3892?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Eco Coffee Mug Set" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Eco Coffee Mug Set (4pc)</div>
+                    <div class="product-description">Insulated mugs for hot beverages with comfortable handles.</div>
+                    <div class="product-price">$24.99</div>
+                    <div class="product-eco-points">Earn 125 Eco Points</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1558200794-ac52dfbad0ea?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Eco Party Cup Set" class="product-image">
+                <div class="product-info">
+                    <div class="product-name">Eco Party Cup Set (12pc)</div>
+                    <div class="product-description">Reusable party cups in various bright colors.</div>
+                    <div class="product-price">$14.99</div>
+                    <div class="product-eco-points">Earn 75 Eco Points</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <h2>Contact Administrator</h2>
+        <p>Email: admin@ecoearn.com</p>
+        <p>Contact number: 555-123-4567</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy;2023 by Eco Earn. Recycle Plastic, Save the Planet</p>
+    </footer>
+</body>
+</html>

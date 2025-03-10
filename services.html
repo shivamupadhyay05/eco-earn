@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Earn - Our Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: #f5f5f5;
+            padding: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #4CAF50;
+        }
+
+        .nav-links a.active {
+            color: #4CAF50;
+        }
+
+        /* Header with signup */
+        .top-header {
+            background-color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .search-box {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            width: 300px;
+            border-radius: 2px 0 0 2px;
+        }
+
+        .search-button {
+            padding: 5px 10px;
+            background-color: #2b5aa1;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 0 2px 2px 0;
+        }
+
+        .create-account {
+            color: #2b5aa1;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Main title */
+        .page-title {
+            text-align: center;
+            color: #2b5aa1;
+            padding: 30px 0;
+            font-size: 28px;
+            font-weight: bold;
+            background-color: #f9f9f9;
+        }
+
+        /* Services Section */
+        .services-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .services-intro {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .services-intro h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .services-intro p {
+            color: #666;
+            line-height: 1.6;
+            max-width: 100px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Reduced image height from 100px to 80px */
+        .service-image {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+        }
+
+        .service-details {
+            padding: 20px;
+            background-color: white;
+        }
+
+        .service-title {
+            font-size: 20px;
+            color: #2b5aa1;
+            margin-bottom: 10px;
+        }
+
+        .service-description {
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .service-features {
+            list-style-type: none;
+            margin-bottom: 20px;
+        }
+
+        .service-features li {
+            color: #555;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .service-features li:before {
+            content: "✓";
+            color: #4CAF50;
+            position: absolute;
+            left: 0;
+        }
+
+        .service-button {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .service-button:hover {
+            background-color: #388E3C;
+        }
+
+        /* Services styling */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .service-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Reduced image dimensions from default to 200px height */
+        .service-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .service-content {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .service-content h3 {
+            color: #2b5aa1;
+            margin-bottom: 5px;
+        }
+
+        .service-content p {
+            color: #666;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            background-color: #2b5aa1;
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+            margin: 40px 0;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .cta-content p {
+            margin-bottom: 30px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #388E3C;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            color: #2b5aa1;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .faq-answer {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: #f9f9f9;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .contact h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .contact p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .contact a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #f5f5f5;
+            padding: 10px 0;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-links {
+                margin-top: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .search-box {
+                width: 200px;
+            }
+            
+            /* Smaller images on mobile */
+            .service-img {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="services.html" class="active">services</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="inventory.html">Inventory</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="profile.html">Profile</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Top Header with Search and Account Creation -->
+    <div class="top-header">
+        <div class="create-account">Create Your Free Account today</div>
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="Search...">
+            <button class="search-button">→</button>
+        </div>
+    </div>
+
+    <!-- Page Title -->
+    <div class="page-title">Our Services</div>
+    
+    <!-- Services Section -->
+    <section class="services">
+        <div class="service-item">
+            <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="Scheduled Delivery" class="service-img">
+            <div class="service-content">
+                <h3>Scheduled Pickup</h3>
+                <p>We Come To You</p>
+            </div>
+        </div>
+        <div class="service-item">
+            <img src="https://images.unsplash.com/photo-1607503873903-c5e95f80d7b9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="Recycling Consultation" class="service-img">
+            <div class="service-content">
+                <h3>Recycling Consultation</h3>
+                <p>Expert Guidance</p>
+            </div>
+        </div>
+        <div class="service-item">
+            <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="Rewards Program" class="service-img">
+            <div class="service-content">
+                <h3>Rewards Program</h3>
+                <p>Earn While You Recycle</p>
+            </div>
+        </div>
+        <div class="service-item">
+            <img src="https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="Scan Your Plastic" class="service-img">
+            <div class="service-content">
+                <h3>Scan Your Plastic</h3>
+                <p>Quick Identification & Sorting</p>
+            </div>
+        </div>
+        <div class="service-item">
+            <img src="https://images.unsplash.com/photo-1607344645866-879e053a0e9d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80" alt="Redeem Your Rewards" class="service-img">
+            <div class="service-content">
+                <h3>Redeem Your Rewards</h3>
+                <p>Turn Points Into Benefits</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to Start Earning While Saving the Planet?</h2>
+            <p>Join thousands of environmentally conscious individuals who are making a difference and earning rewards through Eco Earn.</p>
+            <a href="#" class="cta-button">Sign Up Now</a>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question">How does the points system work?</div>
+            <div class="faq-answer">Our points system awards you based on the weight and type of plastic you recycle. Generally, you earn 10 points per kilogram of recyclable plastic. Different plastic types may earn bonus points based on their recyclability. Points can be tracked in your account and redeemed for various rewards.</div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">What types of plastic do you accept?</div>
+            <div class="faq-answer">We accept all seven common types of plastic (marked with recycling codes 1-7). This includes PET, HDPE, PVC, LDPE, PP, PS, and other plastic types. Our scanning feature can help you identify which category your plastic falls into.</div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">How often can I schedule pickups?</div>
+            <div class="faq-answer">You can schedule pickups weekly, bi-weekly, or monthly depending on your needs. For larger volumes or special circumstances, custom pickup schedules can be arranged through our customer service.</div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">What rewards can I redeem my points for?</div>
+            <div class="faq-answer">Points can be redeemed for cash payments, gift cards to popular retailers, discounts at our partner businesses, eco-friendly products, or donations to environmental organizations. The rewards catalog is regularly updated in our app.</div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <h2>Contact Administrator</h2>
+        <p>Email: shivamupadhyayop@gmail.com</p>
+        <p>Contact number: 6390533255</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy;2025 by Eco Earn. Recycle Plastic, Save the Planet</p>
+    </footer>
+</body>
+</html>

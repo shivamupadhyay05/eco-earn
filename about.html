@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Eco Earn</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: #f5f5f5;
+            padding: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #4CAF50;
+        }
+
+        .nav-links a.active {
+            color: #4CAF50;
+        }
+
+        /* Header with signup */
+        .top-header {
+            background-color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .search-box {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            width: 300px;
+            border-radius: 2px 0 0 2px;
+        }
+
+        .search-button {
+            padding: 5px 10px;
+            background-color: #2b5aa1;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 0 2px 2px 0;
+        }
+
+        .create-account {
+            color: #2b5aa1;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* Main title */
+        .site-title {
+            text-align: center;
+            color: #2b5aa1;
+            padding: 20px 0;
+            font-size: 24px;
+            font-weight: bold;
+            background-color: #fff;
+        }
+
+        /* Page Content */
+        .page-content {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .page-title {
+            color: #2b5aa1;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .page-subtitle {
+            color: #333;
+            margin: 20px 0 10px;
+            font-size: 20px;
+        }
+
+        .page-text {
+            margin-bottom: 15px;
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: #f9f9f9;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .contact h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .contact p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .contact a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #f5f5f5;
+            padding: 10px 0;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-links {
+                margin-top: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .search-box {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="inventory.html">Inventory</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="profile.html">Profile</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Top Header with Search and Account Creation -->
+    <div class="top-header">
+        <div class="create-account">Create Your Free Account today</div>
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="Search...">
+            <button class="search-button">→</button>
+        </div>
+    </div>
+
+    <!-- Site Title -->
+    <div class="site-title">About Eco Earn</div>
+
+    <!-- Page Content -->
+    <div class="page-content">
+        <h1 class="page-title">More about Eco Earn</h1>
+        
+        <h2 class="page-subtitle">Our Aim</h2>
+        <p class="page-text">
+            Our innovative plastic recycling platform offers a convenient solution for eco-conscious
+            individuals. Simply upload a photo of your plastic items, and we'll connect you with the
+            nearest retailer or recycling center. Companies and organizations can offer points based on
+            the quantity and quality of plastic you recycle. These points can be redeemed for fantastic
+            discounts and coupons on their party websites.
+        </p>
+        
+        <h2 class="page-subtitle">Our Mission</h2>
+        <p class="page-text">
+            At Eco Earn, we're committed to making recycling accessible, rewarding, and impactful. 
+            Our mission is to reduce plastic waste while creating economic incentives that make 
+            sustainable choices the easy choice.
+        </p>
+        
+        <h2 class="page-subtitle">Our Impact</h2>
+        <p class="page-text">
+            Since our founding, our community has recycled over 50,000 tons of plastic, preventing it 
+            from entering oceans and landfills. Join us in making a positive impact on the environment 
+            while enjoying rewards for your sustainable choices.
+        </p>
+    </div>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <h2>Contact Administrator</h2>
+        <p>Email: admin@ecoearn.com</p>
+        <p>Contact number: 555-123-4567</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy;2023 by Eco Earn. Recycle Plastic, Save the Planet</p>
+    </footer>
+</body>
+</html>

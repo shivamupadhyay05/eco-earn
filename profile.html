@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Earn - User Profile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+        }
+
+        /* Reusing existing styles from your main page */
+        .navbar {
+            background-color: #f5f5f5;
+            padding: 10px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #4CAF50;
+        }
+
+        .nav-links a.active {
+            color: #4CAF50;
+        }
+
+        .site-title {
+            text-align: center;
+            color: #2b5aa1;
+            padding: 20px 0;
+            font-size: 24px;
+            font-weight: bold;
+            background-color: #fff;
+        }
+
+        /* Profile specific styles */
+        .profile-container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 20px auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .profile-sidebar {
+            flex: 1;
+            min-width: 250px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .profile-content {
+            flex: 3;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #4CAF50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .profile-info h2 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .profile-stats {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .profile-menu {
+            list-style: none;
+        }
+
+        .profile-menu li {
+            margin-bottom: 15px;
+        }
+
+        .profile-menu a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #555;
+            padding: 10px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .profile-menu a:hover {
+            background-color: #f0f0f0;
+            color: #4CAF50;
+        }
+
+        .profile-menu a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .menu-icon {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .section-title {
+            color: #2b5aa1;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Dashboard Cards */
+        .dashboard-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            flex: 1;
+            min-width: 200px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-title {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .card-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2b5aa1;
+        }
+
+        .card.points {
+            background-color: #e8f5e9;
+        }
+
+        .card.points .card-value {
+            color: #4CAF50;
+        }
+
+        .card.plastic {
+            background-color: #e3f2fd;
+        }
+
+        .card.rewards {
+            background-color: #fff8e1;
+        }
+
+        .card.rewards .card-value {
+            color: #ffc107;
+        }
+
+        /* Recent Activity Table */
+        .activity-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .activity-table th, .activity-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .activity-table th {
+            background-color: #f5f5f5;
+            color: #555;
+            font-weight: bold;
+        }
+
+        .activity-table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status.completed {
+            background-color: #e8f5e9;
+            color: #4CAF50;
+        }
+
+        .status.pending {
+            background-color: #fff8e1;
+            color: #ffc107;
+        }
+
+        footer {
+            background-color: #f5f5f5;
+            padding: 10px 0;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .profile-container {
+                flex-direction: column;
+            }
+            
+            .dashboard-cards {
+                flex-direction: column;
+            }
+            
+            .activity-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="inventory.html">Inventory</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+                <li><a href="profile.html" class="active">Profile</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Site Title -->
+    <div class="site-title">Eco Earn - My Profile</div>
+
+    <!-- Profile Content -->
+    <div class="profile-container">
+        <!-- Sidebar -->
+        <div class="profile-sidebar">
+            <div class="profile-header">
+                <div class="profile-avatar">JD</div>
+                <div class="profile-info">
+                    <h2>Shivam Upadhyay</h2>
+                    <div class="profile-stats">Member since Jan 2023</div>
+                </div>
+            </div>
+
+            <ul class="profile-menu">
+                <li>
+                    <a href="#" class="active">
+                        <span class="menu-icon">📊</span>Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="menu-icon">♻️</span>My Plastic Sales
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="menu-icon">🎁</span>My Redeems
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="menu-icon">📅</span>Schedule Pickup
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="menu-icon">📝</span>My Information
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="menu-icon">⚙️</span>Settings
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="menu-icon">🔒</span>Privacy & Security
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="menu-icon">❓</span>Help & Support
+                    </a>
+                </li>
+                <li>
+                    <a href="#" style="color: #f44336;">
+                        <span class="menu-icon">🚪</span>Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="profile-content">
+            <h2 class="section-title">Dashboard</h2>
+            
+            <!-- Stats Cards -->
+            <div class="dashboard-cards">
+                <div class="card points">
+                    <div class="card-title">Total Eco Points</div>
+                    <div class="card-value">2,450</div>
+                </div>
+                <div class="card plastic">
+                    <div class="card-title">Plastic Recycled</div>
+                    <div class="card-value">85 kg</div>
+                </div>
+                <div class="card rewards">
+                    <div class="card-title">Rewards Redeemed</div>
+                    <div class="card-value">12</div>
+                </div>
+            </div>
+
+            <h3 class="section-title">Recent Activity</h3>
+            
+            <!-- Recent Activity Table -->
+            <table class="activity-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Activity</th>
+                        <th>Points</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mar 5, 2025</td>
+                        <td>Plastic Recycling - PET Bottles</td>
+                        <td>+120 pts</td>
+                        <td><span class="status completed">Completed</span></td>
+                    </tr>
+                    <tr>
+                        <td>Feb 28, 2025</td>
+                        <td>Reward Redemption - Gift Card</td>
+                        <td>-500 pts</td>
+                        <td><span class="status completed">Completed</span></td>
+                    </tr>
+                    <tr>
+                        <td>Feb 22, 2025</td>
+                        <td>Plastic Recycling - HDPE Containers</td>
+                        <td>+85 pts</td>
+                        <td><span class="status completed">Completed</span></td>
+                    </tr>
+                    <tr>
+                        <td>Feb 15, 2025</td>
+                        <td>Scheduled Pickup Request</td>
+                        <td>--</td>
+                        <td><span class="status pending">Pending</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 by Eco Earn. Recycle Plastic, Save the Planet</p>
+    </footer>
+
+    <script>
+        // For demonstration purposes - handle menu clicks
+        document.querySelectorAll('.profile-menu a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector('.profile-menu a.active').classList.remove('active');
+                this.classList.add('active');
+                // In a real app, you would load the appropriate content here
+            });
+        });
+    </script>
+</body>
+</html>
