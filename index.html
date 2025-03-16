@@ -227,6 +227,83 @@
                 width: 200px;
             }
         }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            background-color: white;
+        }
+        .chat-header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        .chat-body {
+            height: 400px;
+            overflow-y: auto;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-input {
+            display: flex;
+            border-top: 1px solid #e0e0e0;
+            padding: 10px;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+        .chat-input button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        .message {
+            max-width: 70%;
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 15px;
+            word-wrap: break-word;
+        }
+        .user-message {
+            background-color: #e3f2fd;
+            align-self: flex-end;
+        }
+        .bot-message {
+            background-color: #f1f1f1;
+            align-self: flex-start;
+        }
+        .thinking {
+            color: #888;
+            align-self: flex-start;
+            font-style: italic;
+            margin: 5px;
+        }
+        .chat-minimized {
+            height: 0px;
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
@@ -309,7 +386,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy;2023 by Eco Earn. Recycle Plastic, Save the Planet</p>
+        <p>&copy;2025 by Eco Earn. Recycle Plastic, Save the Planet</p>
     </footer>
 
     <script>
@@ -322,5 +399,188 @@
             mainBanner.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
         });
     </script>
+        <div class="chat-container">
+            <div class="chat-header" id="chat-header">
+                <span>EcoEarn Assistant</span>
+                <span id="toggle-chat">-</span>
+            </div>
+            <div class="chat-body" id="chat-body">
+                <div class="message bot-message">
+                    Hello! I'm your EcoEarn assistant. Ask me about our platform features or eco-friendly services!
+                </div>
+            </div>
+            <div class="chat-input" id="chat-input">
+                <input type="text" id="user-input" placeholder="Type your message...">
+                <button id="send-button">Send</button>
+            </div>
+        </div>
+    
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const chatBody = document.getElementById('chat-body');
+                const userInput = document.getElementById('user-input');
+                const sendButton = document.getElementById('send-button');
+                const chatHeader = document.getElementById('chat-header');
+                const toggleChat = document.getElementById('toggle-chat');
+                const chatInputContainer = document.getElementById('chat-input');
+                
+                let isChatOpen = true;
+                
+                // Basic responses for the EcoEarn chatbot
+                const responses = {
+                    greeting: [
+                        "Hello! Welcome to EcoEarn. How can I help you learn about our eco-friendly platform?",
+                        "Hi there! I'm your EcoEarn assistant. What would you like to know about our services?",
+                        "Hey! Thanks for your interest in EcoEarn. How can I assist you today?"
+                    ],
+                    features: [
+                        "EcoEarn offers several eco-friendly features: selling plastic waste for rewards, redeeming cashback points, buying recycled products, multilingual support, and a user-friendly interface. What would you like to know more about?",
+                        "Our platform lets you sell plastic waste, earn rewards, buy recycled products, and track your environmental impact. Which feature interests you the most?"
+                    ],
+                    plastic_waste: [
+                        "At EcoEarn, you can sell your plastic waste through our platform and earn cashback points based on the amount and quality of waste submitted. Would you like to know how to get started?",
+                        "Our plastic waste selling program lets you earn rewards for recycling! Simply bring your clean, sorted plastic to our collection points or schedule a pickup through the app."
+                    ],
+                    rewards: [
+                        "Our cashback system rewards you with points when you sell plastic waste. These points can be redeemed for eco-friendly products or discounts on our marketplace.",
+                        "EcoEarn rewards users with cashback points based on the amount and quality of plastic waste submitted. The more you recycle, the more you earn!"
+                    ],
+                    products: [
+                        "Our marketplace features affordable products made from recycled plastic. By shopping with us, you support a circular economy and sustainable consumption.",
+                        "EcoEarn offers a variety of products made from recycled materials. From household items to fashion accessories, we have eco-friendly alternatives for everyday needs."
+                    ],
+                    interface: [
+                        "EcoEarn features an intuitive, user-friendly interface designed for easy navigation. Our platform is mobile-friendly for a smooth experience across all devices.",
+                        "Our interface is designed with simplicity in mind, ensuring users of all tech levels can easily navigate our platform on both desktop and mobile devices."
+                    ],
+                    impact: [
+                        "With our Eco-Impact Tracker, you can monitor your contribution to sustainability, including waste recycled and CO₂ reduction. It's a great way to see your positive environmental impact!",
+                        "EcoEarn's tracking feature provides visual insights on how much waste you've recycled and the corresponding environmental benefits, like CO₂ reduction."
+                    ],
+                    community: [
+                        "Our community features include eco-friendly challenges with rewards, educational blogs, and tips on sustainable living to keep you engaged and informed.",
+                        "EcoEarn fosters a community of environmentally conscious individuals through challenges, educational content, and sustainability tips."
+                    ],
+                    security: [
+                        "At EcoEarn, we prioritize secure transactions and data privacy, ensuring safe payment processing and protection of your personal information.",
+                        "Your security matters to us. EcoEarn implements robust security measures for all transactions and strictly adheres to data privacy regulations."
+                    ],
+                    default: [
+                        "That's an interesting question about sustainability. Our platform focuses on plastic waste recycling and eco-friendly products. Would you like to know more about any specific feature?",
+                        "I'd be happy to tell you more about EcoEarn's features like our reward system, recycled products marketplace, or impact tracking. Which interests you most?"
+                    ]
+                };
+                
+                // Get response based on user input
+                function getBotResponse(input) {
+                    const lowerInput = input.toLowerCase();
+                    
+                    if (/hi|hello|hey/.test(lowerInput)) {
+                        return getRandomResponse(responses.greeting);
+                    } 
+                    else if (/features|what.*(do|can|offer)|services/.test(lowerInput)) {
+                        return getRandomResponse(responses.features);
+                    }
+                    else if (/(sell|selling).*(plastic|waste)|plastic.*(sell|selling)/.test(lowerInput)) {
+                        return getRandomResponse(responses.plastic_waste);
+                    }
+                    else if (/(cashback|rewards|points|earn)/.test(lowerInput)) {
+                        return getRandomResponse(responses.rewards);
+                    }
+                    else if (/(recycled|products|buy|purchase)/.test(lowerInput)) {
+                        return getRandomResponse(responses.products);
+                    }
+                    else if (/(interface|design|app|website|mobile)/.test(lowerInput)) {
+                        return getRandomResponse(responses.interface);
+                    }
+                    else if (/(track|tracking|impact|contribution|sustainability)/.test(lowerInput)) {
+                        return getRandomResponse(responses.impact);
+                    }
+                    else if (/(community|challenge|education|blog|tips)/.test(lowerInput)) {
+                        return getRandomResponse(responses.community);
+                    }
+                    else if (/(secure|security|privacy|data|payment)/.test(lowerInput)) {
+                        return getRandomResponse(responses.security);
+                    }
+                    else {
+                        return getRandomResponse(responses.default);
+                    }
+                }
+                
+                function getRandomResponse(responseArray) {
+                    const randomIndex = Math.floor(Math.random() * responseArray.length);
+                    return responseArray[randomIndex];
+                }
+                
+                function addMessage(message, isUser) {
+                    const messageElement = document.createElement('div');
+                    messageElement.classList.add('message');
+                    messageElement.classList.add(isUser ? 'user-message' : 'bot-message');
+                    messageElement.textContent = message;
+                    chatBody.appendChild(messageElement);
+                    chatBody.scrollTop = chatBody.scrollHeight;
+                }
+                
+                function showThinking() {
+                    const thinkingElement = document.createElement('div');
+                    thinkingElement.classList.add('thinking');
+                    thinkingElement.setAttribute('id', 'thinking-indicator');
+                    thinkingElement.textContent = 'EcoEarn Assistant is typing...';
+                    chatBody.appendChild(thinkingElement);
+                    chatBody.scrollTop = chatBody.scrollHeight;
+                }
+                
+                function removeThinking() {
+                    const thinkingElement = document.getElementById('thinking-indicator');
+                    if (thinkingElement) {
+                        thinkingElement.remove();
+                    }
+                }
+                
+                function handleUserInput() {
+                    const message = userInput.value.trim();
+                    if (message) {
+                        addMessage(message, true);
+                        userInput.value = '';
+                        
+                        // Show thinking indicator
+                        showThinking();
+                        
+                        // Simulate bot thinking delay
+                        setTimeout(() => {
+                            removeThinking();
+                            
+                            // Get and display bot response
+                            const botResponse = getBotResponse(message);
+                            addMessage(botResponse, false);
+                        }, 1000);
+                    }
+                }
+                
+                // Send message on button click
+                sendButton.addEventListener('click', handleUserInput);
+                
+                // Send message on Enter key
+                userInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        handleUserInput();
+                    }
+                });
+                
+                // Toggle chat open/close
+                chatHeader.addEventListener('click', function() {
+                    isChatOpen = !isChatOpen;
+                    if (isChatOpen) {
+                        chatBody.style.display = 'flex';
+                        chatInputContainer.style.display = 'flex';
+                        toggleChat.textContent = '-';
+                    } else {
+                        chatBody.style.display = 'none';
+                        chatInputContainer.style.display = 'none';
+                        toggleChat.textContent = '+';
+                    }
+                });
+            });
+        </script>
 </body>
 </html>
